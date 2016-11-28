@@ -1,1 +1,41 @@
+
+{{#if togglePoints}}
+<div class='points'>
+  <div class='to'>
+    To: {{input placeholder="Where are you?" key-press="updateTo"}}
+  </div>
+
+  <div class='from'>
+    From: {{input placeholder="Where you going?" key-press="updateFrom"}}
+  </div>
+
+  <div class='submitPointsButton'>
+    <button {{action "submitPoints"}}>next</button>
+  </div>
+
+</div>
+{{/if}}
+
+{{#if toggleOptions}}
+<div class='options'>
+</div>
+{{/if}}
+
+{{#if toggleMap}}
+<div class='map'>
+</div>
+{{/if}}
+
+{{#if toggleRate}}
+<div class='rate'>
+
+  <div class='submitRateButton'>
+    <button {{action "submit"}}>submit</button>
+  </div>
+</div>
+{{/if}}
+
+
+
+
 {{outlet}}
