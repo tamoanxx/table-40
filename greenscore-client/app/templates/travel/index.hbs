@@ -28,11 +28,12 @@
 <div class='options'>
   {{#each travelModes as |travelMode|}}
     {{travel-score
-      source='1419 West 19th Street, Chicago, IL'
-      destination='1110 N Kedzie Ave, Chicago, IL'
+      source=source
+      destination=destination
       travelMode=travelMode
       currentControllerBinding='controller'
     }}
+  <div style='padding:10px'></div>
   {{/each}}
 </div>
 {{/if}}

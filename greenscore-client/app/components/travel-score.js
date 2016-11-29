@@ -13,7 +13,7 @@ export default Ember.Component.extend({
 
   myGreenScore: Ember.computed(function() {
     var self = this;
-    this.actions.getGreenScorePromise('TRANSIT', 10, this.get('ajax')).then(function(out) {
+    this.actions.getGreenScorePromise(this.get('travelMode'), 10, this.get('ajax')).then(function(out) {
       self.set('greenScore', out.GS)
     });
   }),
@@ -57,7 +57,8 @@ export default Ember.Component.extend({
     },
 
     rated(number) {
-      window.location = "http://localhost:4200/thankyou";
+      // TODO hacks
+      window.location = "http://greenscore.city/thankyou";
     },
 
     getGreenScorePromise(type, dist, ajax) {
