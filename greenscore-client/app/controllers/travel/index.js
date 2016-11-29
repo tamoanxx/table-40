@@ -9,9 +9,6 @@ export default Ember.Controller.extend({
     'BICYCLING'
   ],
 
-  //toDest: null, // '1419 West 19th Street, Chicago, IL',
-  //fromDest: null, // '1110 N Kedzie Ave, Chicago, IL',
-
   togglePoints: true,
   toggleOptions: false,
   toggleMap: false,
@@ -19,11 +16,20 @@ export default Ember.Controller.extend({
 
   travelOptions: [],
 
+  click(number) {
+    console.log(number);
+  },
+
   distanceService: function() {
     return new window.google.maps.DistanceMatrixService;
   },
 
   actions: {
+    rated(number) {
+      this.set('toggleRate', false);
+      this.set('toggleEnd', true);
+    },
+
     updateTo: function(to) {
       this.set('toDest', to);
     },
@@ -37,14 +43,10 @@ export default Ember.Controller.extend({
       this.set('toggleOptions', true);
     },
 
-    submitOption: function(option) {
-      //this.set('toggleOptions', false);
-      //this.set('toggleMap', true);
+    submitRate() {
+      this.set('toggleOptions', false);
+      this.set('toggleRate', true);
     },
 
-    submitRate: function() {
-      this.set('toggleMap', false);
-      this.set('toggleRate', true);
-    }
   }
 });

@@ -1,13 +1,21 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  ajax: Ember.inject.service(),
 
   source: '1419 West 19th Street, Chicago, IL',
   destination: '1110 N Kedzie Ave, Chicago, IL',
   travelMode: 'TRANSIT',
 
-  greenScore: Ember.computed(function() {
-    return 1;
+  humanizedTravelMode: Ember.computed(function() {
+    return this.get('travelMode').decamelize().capitalize();
+  }),
+
+  myGreenScore: Ember.computed(function() {
+    var self = this;
+    this.actions.getGreenScorePromise('TRANSIT', 10, this.get('ajax')).then(function(out) {
+      self.set('greenScore', out.GS)
+    });
   }),
 
   myDist: function() {
@@ -48,16 +56,16 @@ export default Ember.Component.extend({
       });
     },
 
-    //getGreenScorePromise(type, dist) {
-      //return this.get('ajax').request('https://raw.githubusercontent.com/origilad/170/master/package.json');
-    //},
-
-    //async getGreenScore(type, dist) {
-      //return await this.getGreenScorePromise(type, dist);
-    //},
-
-    getGreenScore(dist) {
-      return 1;
+    getGreenScorePromise(type, dist, ajax) {
+      return ajax.request('https://c4or7fhrmf.execute-api.us-east-1.amazonaws.com/prod/greenscore/calculate', {
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+          "type": type,
+          "distance": '' + dist
+        }),
+        dataType: "json",
+      });
     },
 
     async getDistance() {

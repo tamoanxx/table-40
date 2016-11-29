@@ -1,16 +1,32 @@
-{{travelMode}}
-
-GreenScore {{greenScore}}
-
-<!-- this is a hack -->
+<!-- this is a hack to fetch data -->
 {{myDist}}
-{{myDistText}}
-{{myDur}}
+{{myGreenScore}}
 
-{{google-map
-  source=source
-  destination=destination
-  travelMode=travelMode
-}}
-
-{{yield}}
+<div class='travel-score'>
+  <div class='row'>
+    <div class='col-md-6'>
+      {{google-map
+        source=source
+        destination=destination
+        travelMode=travelMode
+      }}
+    </div>
+    <div class='col-md-6'>
+      <div class='row'>
+        GreenScore: {{greenScore}}
+      </div>
+      <div style='padding:10px'></div>
+      <div class='row'>
+        Distance: {{myDistText}}
+      </div>
+      <div style='padding:10px'></div>
+      <div class='row'>
+        Duration: {{myDur}}
+      </div>
+      <div style='padding:10px'></div>
+      <div class='row'>
+        Travel Mode: {{humanizedTravelMode}}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,15 +1,24 @@
+<div class='travel-container'>
 {{#if togglePoints}}
 <div class='points'>
-  <div class='to'>
-    To: {{input placeholder="Where are you?" valueBinding='fromDest'}}
+
+  <div class='row'>
+    <div class='col-md-1'>To:</div>
+    <div class='col-md-10'>{{input placeholder="Where are you?" valueBinding='source' class='toInput'}}</div>
   </div>
 
-  <div class='from'>
-    From: {{input placeholder="Where you going?" valueBinding='toDest'}}
+  <div style='padding-top:10px'></div>
+
+  <div class='row'>
+    <div class='col-md-1'>From:</div>
+    <div class='col-md-10'>{{input placeholder="Where you going?" valueBinding='destination' class='fromInput'}}</div>
   </div>
+
+  <div style='padding-top:10px'></div>
 
   <div class='submitPointsButton'>
-    <button {{action "submitPoints"}}>next</button>
+    <div class='col-md-1'></div>
+    <div class='col-md-10'><button {{action "submitPoints"}}>next</button></div>
   </div>
 
 </div>
@@ -19,26 +28,30 @@
 <div class='options'>
   {{#each travelModes as |travelMode|}}
     {{travel-score
-      source=toDest
-      destination=fromDest
+      source='1419 West 19th Street, Chicago, IL'
+      destination='1110 N Kedzie Ave, Chicago, IL'
       travelMode=travelMode
     }}
+    <button {{action "submitRate"}}>rate</button>
   {{/each}}
 </div>
 {{/if}}
 
-{{#if toggleMap}}
-<div class='map'>
-</div>
-{{/if}}
-
 {{#if toggleRate}}
-<div class='rate'>
-
-  <div class='submitRateButton'>
-    <button {{action "submit"}}>submit</button>
+  <div class='rate'>
+    <button {{action "rated" 3}} style='font-size: 100px'>😁 </button>
+    <button {{action "rated" 2}} style='font-size: 100px'>😀 </button>
+    <button {{action "rated" 1}} style='font-size: 100px'>🙂 </button>
+    <button {{action "rated" 0}} style='font-size: 100px'>😐 </button>
+    <button {{action "rated" -1}} style='font-size: 100px'>🙁 </button>
+    <button {{action "rated" -2}} style='font-size: 100px'>☹️ </button>
+    <button {{action "rated" -3}} style='font-size: 100px'>😭 </button>
   </div>
-</div>
 {{/if}}
+
+{{#if toggleEnd}}
+  Thanks
+{{/if}}
+</div>
 
 {{outlet}}
