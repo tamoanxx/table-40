@@ -1,15 +1,16 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  ajax: Ember.inject.service(),
 
   travelModes: [
     'DRIVING',
     'TRANSIT',
-    'BICYCLE'
+    'BICYCLING'
   ],
 
-  toDest: '',
-  fromDest: '',
+  toDest: '1419 West 19th Street, Chicago, IL',
+  fromDest: '1110 N Kedzie Ave, Chicago, IL',
 
   togglePoints: true,
   toggleOptions: false,
@@ -56,17 +57,39 @@ export default Ember.Controller.extend({
       });
     },
 
+
+    //getGreenScorePromise(type, dist) {
+      //return this.get('ajax').request('https://raw.githubusercontent.com/origilad/170/master/package.json');
+    //},
+
+    //async getGreenScore(type, dist) {
+      //return await this.getGreenScorePromise(type, dist);
+    //},
+
+    getGreenScore(type, dist) {
+      return 1;
+    },
+
     async getDistance(source, dest, mode) {
       return await this.getDistancePromise(source, dest, mode);
     },
 
     async submitPoints() {
       var carDistance = await this.actions.getDistance('boston, ma', 'new york, ny', 'DRIVING');
-      var transitDistance = await this.actions.getDistance('boston, ma', 'new york, ny', 'TRANSIT');
-      var bikeDistance = await this.actions.getDistance('boston, ma', 'new york, ny', 'BICYCLING');
-      var walkDistance = await this.actions.getDistance('boston, ma', 'new york, ny', 'WALKING');
+      var carGreenScore = this.actions.getGreenScore('DRIVING', carDistance.dist.value)
 
-      console.log(carDistance);
+      var transitDistance = await this.actions.getDistance('boston, ma', 'new york, ny', 'TRANSIT');
+      var transitGreenScore = this.actions.getGreenScore('TRANSIT', transitDistance.dist.value)
+
+      var bikeDistance = await this.actions.getDistance('boston, ma', 'new york, ny', 'BICYCLING');
+      var bikeGreenScore = this.actions.getGreenScore('BYCYCLING', bikeDistance.dist.value)
+
+      var walkDistance = await this.actions.getDistance('boston, ma', 'new york, ny', 'WALKING');
+      var walkGreenScore = this.actions.getGreenScore('WALKING', walkDistance.dist.value)
+
+
+      this.set('togglePoints', false);
+      this.set('toggleOptions', true);
     },
 
     submitOption: function(option) {

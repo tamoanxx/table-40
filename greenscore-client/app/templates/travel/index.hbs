@@ -1,4 +1,6 @@
 
+
+
 {{#if togglePoints}}
 <div class='points'>
   <div class='to'>
@@ -18,6 +20,14 @@
 
 {{#if toggleOptions}}
 <div class='options'>
+  {{#each travelModes as |travelMode|}}
+    {{travelMode}}
+    {{google-map
+      source=toDest
+      destination=fromDest
+      travelMode=travelMode
+    }}
+  {{/each}}
 </div>
 {{/if}}
 
@@ -34,8 +44,5 @@
   </div>
 </div>
 {{/if}}
-
-
-
 
 {{outlet}}
