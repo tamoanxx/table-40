@@ -4,6 +4,11 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
+
+    babel: {
+      stage: 1,
+      includePolyfill: true,
+    }
     // Add options here
   });
 

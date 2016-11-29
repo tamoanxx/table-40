@@ -18,6 +18,9 @@ export default Ember.Controller.extend({
 
   travelOptions: [],
 
+  distanceService: function() {
+    return new window.google.maps.DistanceMatrixService;
+  },
 
   actions: {
     updateTo: function(to) {
@@ -28,39 +31,42 @@ export default Ember.Controller.extend({
       this.set('fromDest', from);
     },
 
-    submitPoints: function() {
+    getDistancePromise: function(source, dest, mode) {
+      return new Promise(function(resolve, reject) {
+        var distanceService = new window.google.maps.DistanceMatrixService;
 
-      var distanceService = new window.google.maps.DistanceMatrixService;
-
-      var self = this;
-
-      this.get('travelModes').forEach(function(travelMode) {
         distanceService.getDistanceMatrix({
-          origins: [self.get('toDest')],
-          destinations: [self.get('fromDest')],
-          travelMode: travelMode,
+          origins: [source],
+          destinations: [dest],
+          travelMode: mode,
           //transitOptions: TransitOptions,
           //drivingOptions: DrivingOptions,
-          //unitSystem: UnitSystem,
+          unitSystem: 1, // 0 metrics, 1 imperial
           //avoidHighways: Boolean,
           //avoidTolls: Boolean,
         }, function(response, status) {
           if (status == window.google.maps.DirectionsStatus.OK) {
-            var distance = response.rows[0].elements[0].distance
-            self.get('travelOptions').pushObject({
-              "type": travelMode,
-              "dist": distance
-            })
-            //self.set('togglePoints', false);
-            //self.set('toggleOptions', true);
+            var distance = response.rows[0].elements[0].distance;
+            var duration = response.rows[0].elements[0].duration;
+            resolve({"dist": distance, "dur": duration});
           } else {
-            window.alert('Directions request failed due to ' + status);
+            reject(new Error('Failure' + status));
           }
         });
       });
+    },
 
-      debugger;
+    async getDistance(source, dest, mode) {
+      return await this.getDistancePromise(source, dest, mode);
+    },
 
+    async submitPoints() {
+      var carDistance = await this.actions.getDistance('boston, ma', 'new york, ny', 'DRIVING');
+      var transitDistance = await this.actions.getDistance('boston, ma', 'new york, ny', 'TRANSIT');
+      var bikeDistance = await this.actions.getDistance('boston, ma', 'new york, ny', 'BICYCLING');
+      var walkDistance = await this.actions.getDistance('boston, ma', 'new york, ny', 'WALKING');
+
+      console.log(carDistance);
     },
 
     submitOption: function(option) {
