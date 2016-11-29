@@ -1,0 +1,14 @@
+{
+  "name": "awstable40",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "deploy": "serverless deploy"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "pg": "*"
+  }
+}
