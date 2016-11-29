@@ -57,8 +57,7 @@ export default Ember.Component.extend({
     },
 
     rated(number) {
-      // TODO hacks
-      window.location = "http://greenscore.city/thankyou";
+      window.location = "/thankyou";
     },
 
     getGreenScorePromise(type, dist, ajax) {
