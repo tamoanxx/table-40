@@ -27,6 +27,18 @@
       <div class='row'>
         Travel Mode: {{humanizedTravelMode}}
       </div>
+      <div style='padding:10px'></div>
+      <div class='row'>
+        <div class='rate'>
+          <button {{action "rated" 3}}>😁 </button>
+          <button {{action "rated" 2}}>😀 </button>
+          <button {{action "rated" 1}}>🙂 </button>
+          <button {{action "rated" 0}}>😐 </button>
+          <button {{action "rated" -1}}>🙁 </button>
+          <button {{action "rated" -2}}>☹️ </button>
+          <button {{action "rated" -3}}>😭 </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -25,7 +25,8 @@ export default Ember.Controller.extend({
   },
 
   actions: {
-    rated(number) {
+    rate(number) {
+      console.log("value");
       this.set('toggleRate', false);
       this.set('toggleEnd', true);
     },
@@ -46,7 +47,6 @@ export default Ember.Controller.extend({
     submitRate() {
       this.set('toggleOptions', false);
       this.set('toggleRate', true);
-    },
-
+    }
   }
 });

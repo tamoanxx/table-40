@@ -32,21 +32,8 @@
       destination='1110 N Kedzie Ave, Chicago, IL'
       travelMode=travelMode
     }}
-    <button {{action "submitRate"}}>rate</button>
   {{/each}}
 </div>
-{{/if}}
-
-{{#if toggleRate}}
-  <div class='rate'>
-    <button {{action "rated" 3}} style='font-size: 100px'>😁 </button>
-    <button {{action "rated" 2}} style='font-size: 100px'>😀 </button>
-    <button {{action "rated" 1}} style='font-size: 100px'>🙂 </button>
-    <button {{action "rated" 0}} style='font-size: 100px'>😐 </button>
-    <button {{action "rated" -1}} style='font-size: 100px'>🙁 </button>
-    <button {{action "rated" -2}} style='font-size: 100px'>☹️ </button>
-    <button {{action "rated" -3}} style='font-size: 100px'>😭 </button>
-  </div>
 {{/if}}
 
 {{#if toggleEnd}}

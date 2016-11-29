@@ -17,6 +17,13 @@
   width: 100%;
 }
 
+.rate button {
+  background-color: white;
+  border: none;
+  color: white;
+  font-size: 70px;
+}
+
 .points button {
   background-color: #4CAF50; /* Green */
   border: none;
@@ -29,4 +36,3 @@
   float: right;
   margin-right: -12px;
 }
-

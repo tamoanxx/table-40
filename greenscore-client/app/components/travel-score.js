@@ -56,6 +56,12 @@ export default Ember.Component.extend({
       });
     },
 
+    rated(number) {
+      console.log(number;)
+      this.send('rate', number);
+      this.sendAction('rate', number);
+    },
+
     getGreenScorePromise(type, dist, ajax) {
       return ajax.request('https://c4or7fhrmf.execute-api.us-east-1.amazonaws.com/prod/greenscore/calculate', {
         method: 'POST',
