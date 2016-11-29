@@ -1,14 +1,11 @@
-
-
-
 {{#if togglePoints}}
 <div class='points'>
   <div class='to'>
-    To: {{input placeholder="Where are you?" key-press="updateTo"}}
+    To: {{input placeholder="Where are you?" valueBinding='fromDest'}}
   </div>
 
   <div class='from'>
-    From: {{input placeholder="Where you going?" key-press="updateFrom"}}
+    From: {{input placeholder="Where you going?" valueBinding='toDest'}}
   </div>
 
   <div class='submitPointsButton'>
@@ -21,8 +18,7 @@
 {{#if toggleOptions}}
 <div class='options'>
   {{#each travelModes as |travelMode|}}
-    {{travelMode}}
-    {{google-map
+    {{travel-score
       source=toDest
       destination=fromDest
       travelMode=travelMode
