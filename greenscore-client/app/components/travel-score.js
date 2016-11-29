@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import $ from 'jquery';
 
 export default Ember.Component.extend({
   ajax: Ember.inject.service(),
@@ -57,7 +58,8 @@ export default Ember.Component.extend({
     },
 
     rated(number) {
-      window.location = "/thankyou";
+      var ele = $('.other')[0]
+      ele.replaceWith("Thanks!");
     },
 
     getGreenScorePromise(type, dist, ajax) {
