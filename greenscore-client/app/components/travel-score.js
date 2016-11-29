@@ -57,9 +57,7 @@ export default Ember.Component.extend({
     },
 
     rated(number) {
-      console.log(number;)
-      this.send('rate', number);
-      this.sendAction('rate', number);
+      window.location = "http://localhost:4200/thankyou";
     },
 
     getGreenScorePromise(type, dist, ajax) {

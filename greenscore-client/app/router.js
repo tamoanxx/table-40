@@ -13,6 +13,7 @@ Router.map(function() {
     this.route('options');
     this.route('rate');
   });
+  this.route('thankyou');
 });
 
 export default Router;
